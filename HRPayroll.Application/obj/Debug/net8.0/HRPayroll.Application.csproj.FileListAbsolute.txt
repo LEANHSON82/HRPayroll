@@ -1,0 +1,15 @@
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/bin/Debug/net8.0/HRPayroll.Application.deps.json
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/bin/Debug/net8.0/HRPayroll.Application.dll
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/bin/Debug/net8.0/HRPayroll.Application.pdb
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/bin/Debug/net8.0/HRPayroll.Domain.dll
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/bin/Debug/net8.0/HRPayroll.Domain.pdb
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.csproj.AssemblyReference.cache
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.AssemblyInfoInputs.cache
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.AssemblyInfo.cs
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.csproj.CoreCompileInputs.cache
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayrol.49E25328.Up2Date
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.dll
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/refint/HRPayroll.Application.dll
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/HRPayroll.Application.pdb
+/home/kurin/Projects/FullSnack/HRPayroll/HRPayroll.Application/obj/Debug/net8.0/ref/HRPayroll.Application.dll
