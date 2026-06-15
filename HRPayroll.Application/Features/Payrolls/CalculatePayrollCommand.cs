@@ -40,7 +40,8 @@ public class CalculatePayrollCommandHandler : IRequestHandler<CalculatePayrollCo
             // Simple payroll calculation logic
             decimal totalAllowances = config.MealAllowance + config.TransportAllowance;
             decimal totalDeductions = config.InsuranceDeduction + config.OtherDeductions;
-            decimal netSalary = config.BaseSalary + totalAllowances - totalDeductions;
+            // Sàn ở 0: thực lãnh không bao giờ được âm (phòng trường hợp khấu trừ vượt thu nhập).
+            decimal netSalary = Math.Max(0, config.BaseSalary + totalAllowances - totalDeductions);
 
             // Check if record already exists
             var existingRecord = await _context.PayrollRecords

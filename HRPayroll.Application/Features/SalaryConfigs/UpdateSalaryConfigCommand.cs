@@ -27,6 +27,17 @@ public class UpdateSalaryConfigCommandHandler : IRequestHandler<UpdateSalaryConf
 
     public async Task<SalaryConfigDto> Handle(UpdateSalaryConfigCommand request, CancellationToken cancellationToken)
     {
+        // Validate nghiệp vụ: không âm và khấu trừ không được vượt tổng thu nhập (tránh thực lãnh âm).
+        if (request.BaseSalary < 0 || request.MealAllowance < 0 || request.TransportAllowance < 0
+            || request.InsuranceDeduction < 0 || request.OtherDeductions < 0)
+            throw new InvalidOperationException("Lương, phụ cấp và khấu trừ không được là số âm.");
+
+        var gross = request.BaseSalary + request.MealAllowance + request.TransportAllowance;
+        var deductions = request.InsuranceDeduction + request.OtherDeductions;
+        if (deductions > gross)
+            throw new InvalidOperationException(
+                $"Tổng khấu trừ ({deductions:#,##0}đ) không được vượt quá tổng thu nhập ({gross:#,##0}đ).");
+
         var config = await _context.SalaryConfigurations
             .FirstOrDefaultAsync(x => x.EmployeeId == request.EmployeeId, cancellationToken);
 

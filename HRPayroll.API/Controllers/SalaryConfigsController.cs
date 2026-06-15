@@ -42,7 +42,14 @@ public class SalaryConfigsController : ControllerBase
     [Authorize(Roles = "Admin,HR")]
     public async Task<ActionResult<SalaryConfigDto>> UpdateConfig([FromBody] UpdateSalaryConfigCommand command)
     {
-        var result = await _mediator.Send(command);
-        return Ok(result);
+        try
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
     }
 }
