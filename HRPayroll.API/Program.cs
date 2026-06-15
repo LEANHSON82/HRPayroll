@@ -70,6 +70,14 @@ builder.Services.AddMassTransit(x =>
 });
 
 builder.Services.AddControllers();
+
+// CORS: cho phép frontend (Vue) gọi API qua trình duyệt. JWT đi trong header nên không cần AllowCredentials.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -112,6 +120,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
