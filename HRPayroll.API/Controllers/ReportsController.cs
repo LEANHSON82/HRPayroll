@@ -1,12 +1,14 @@
 using HRPayroll.Application.DTOs;
 using HRPayroll.Application.Features.Reports;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRPayroll.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Admin,HR,Manager")]
 public class ReportsController : ControllerBase
 {
     private readonly IMediator _mediator;

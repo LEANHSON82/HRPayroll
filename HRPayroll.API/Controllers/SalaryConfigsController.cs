@@ -1,12 +1,15 @@
+using System.Security.Claims;
 using HRPayroll.Application.DTOs;
 using HRPayroll.Application.Features.SalaryConfigs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRPayroll.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class SalaryConfigsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -19,6 +22,14 @@ public class SalaryConfigsController : ControllerBase
     [HttpGet("{employeeId:guid}")]
     public async Task<ActionResult<SalaryConfigDto>> GetConfig(Guid employeeId)
     {
+        // Nhân viên chỉ được xem cấu hình lương của chính mình
+        if (User.IsInRole("Employee"))
+        {
+            var claim = User.FindFirstValue("employee_id");
+            if (!Guid.TryParse(claim, out var selfId) || selfId != employeeId)
+                return Forbid();
+        }
+
         var result = await _mediator.Send(new GetSalaryConfigQuery { EmployeeId = employeeId });
         
         if (result == null)
@@ -28,6 +39,7 @@ public class SalaryConfigsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,HR")]
     public async Task<ActionResult<SalaryConfigDto>> UpdateConfig([FromBody] UpdateSalaryConfigCommand command)
     {
         var result = await _mediator.Send(command);
