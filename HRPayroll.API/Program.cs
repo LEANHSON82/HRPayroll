@@ -38,11 +38,22 @@ builder.Services.AddMassTransit(x =>
 
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host(builder.Configuration["RabbitMQ:Host"] ?? "localhost", "/", h =>
+        // Ưu tiên RABBITMQ_URL (Railway cấp URI đầy đủ kèm user/pass), fallback host + guest/guest cho local/docker.
+        // Phải giống HR Core để 2 service nối CHUNG một broker thì event mới sync được.
+        var rabbitMqUrl = builder.Configuration["RABBITMQ_URL"];
+        if (!string.IsNullOrEmpty(rabbitMqUrl))
         {
-            h.Username("guest");
-            h.Password("guest");
-        });
+            cfg.Host(new Uri(rabbitMqUrl));
+        }
+        else
+        {
+            var rabbitMqHost = builder.Configuration["RabbitMQ:Host"] ?? "localhost";
+            cfg.Host(rabbitMqHost, "/", h =>
+            {
+                h.Username(builder.Configuration["RabbitMQ:Username"] ?? "guest");
+                h.Password(builder.Configuration["RabbitMQ:Password"] ?? "guest");
+            });
+        }
 
         cfg.ReceiveEndpoint("payroll-event-queue", e =>
         {
