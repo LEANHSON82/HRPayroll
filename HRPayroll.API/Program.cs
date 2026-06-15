@@ -43,7 +43,12 @@ builder.Services.AddMassTransit(x =>
         var rabbitMqUrl = builder.Configuration["RABBITMQ_URL"];
         if (!string.IsNullOrEmpty(rabbitMqUrl))
         {
-            cfg.Host(new Uri(rabbitMqUrl));
+            cfg.Host(new Uri(rabbitMqUrl), h =>
+            {
+                // Heartbeat 10s: giữ kết nối qua TCP proxy Railway khỏi bị ngắt khi idle,
+                // và phát hiện rớt kết nối nhanh (~10s thay vì mặc định 60s) → hết trễ ~30s khi nhận event.
+                h.Heartbeat(TimeSpan.FromSeconds(10));
+            });
         }
         else
         {
@@ -52,6 +57,7 @@ builder.Services.AddMassTransit(x =>
             {
                 h.Username(builder.Configuration["RabbitMQ:Username"] ?? "guest");
                 h.Password(builder.Configuration["RabbitMQ:Password"] ?? "guest");
+                h.Heartbeat(TimeSpan.FromSeconds(10));
             });
         }
 
