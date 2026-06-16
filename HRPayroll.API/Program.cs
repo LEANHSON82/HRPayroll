@@ -35,6 +35,8 @@ builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<AttendanceMonthlyClosedEventConsumer>();
     x.AddConsumer<EmployeeCreatedEventConsumer>();
+    x.AddConsumer<EmployeeUpdatedEventConsumer>();
+    x.AddConsumer<EmployeeResignedEventConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -65,6 +67,8 @@ builder.Services.AddMassTransit(x =>
         {
             e.ConfigureConsumer<AttendanceMonthlyClosedEventConsumer>(context);
             e.ConfigureConsumer<EmployeeCreatedEventConsumer>(context);
+            e.ConfigureConsumer<EmployeeUpdatedEventConsumer>(context);
+            e.ConfigureConsumer<EmployeeResignedEventConsumer>(context);
         });
     });
 });

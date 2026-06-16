@@ -21,6 +21,9 @@ public class EmployeeReference
     [MaxLength(200)]
     public string? DepartmentName { get; set; }
 
+    // false khi nhân viên đã nghỉ việc (đồng bộ từ EmployeeResignedEvent của N1)
+    public bool IsActive { get; set; } = true;
+
     // Navigation properties for EF Core
     public SalaryConfiguration? SalaryConfiguration { get; set; }
     public ICollection<PayrollRecord> PayrollRecords { get; set; } = new List<PayrollRecord>();

@@ -12,6 +12,14 @@ public class PayrollDto
     public decimal TotalAllowances { get; set; }
     public decimal TotalDeductions { get; set; }
     public decimal NetSalary { get; set; }
+
+    // Số liệu chấm công đã dùng để tính (audit)
+    public decimal StandardWorkdays { get; set; }
+    public decimal ActualWorkdays { get; set; }
+    public decimal OvertimeHours { get; set; }
+    public decimal PaidLeaveDays { get; set; }
+    public decimal UnpaidLeaveDays { get; set; }
+
     public PayrollStatus Status { get; set; }
     public DateTime CalculatedAt { get; set; }
 }

@@ -57,7 +57,12 @@ public class PayrollsController : ControllerBase
         {
             Month = command.Month,
             Year = command.Year,
-            EmployeeId = command.EmployeeId
+            EmployeeId = command.EmployeeId,
+            StandardWorkdays = command.StandardWorkdays,
+            ActualWorkdays = command.ActualWorkdays,
+            OvertimeHours = command.OvertimeHours,
+            PaidLeaveDays = command.PaidLeaveDays,
+            UnpaidLeaveDays = command.UnpaidLeaveDays
         });
         return Accepted(new { message = "Event published to RabbitMQ. Payroll calculation will run in background." });
     }

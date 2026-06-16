@@ -52,6 +52,11 @@ public class GetPayrollsQueryHandler : IRequestHandler<GetPayrollsQuery, List<Pa
             TotalAllowances = r.TotalAllowances,
             TotalDeductions = r.TotalDeductions,
             NetSalary = r.NetSalary,
+            StandardWorkdays = r.StandardWorkdays,
+            ActualWorkdays = r.ActualWorkdays,
+            OvertimeHours = r.OvertimeHours,
+            PaidLeaveDays = r.PaidLeaveDays,
+            UnpaidLeaveDays = r.UnpaidLeaveDays,
             Status = r.Status,
             CalculatedAt = r.CalculatedAt
         }).ToList();

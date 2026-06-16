@@ -30,6 +30,22 @@ public class PayrollRecord
     [Column(TypeName = "decimal(18,2)")]
     public decimal NetSalary { get; set; }
 
+    // === Số liệu chấm công dùng để tính ra bảng lương này (để audit/báo cáo) ===
+    [Column(TypeName = "decimal(9,2)")]
+    public decimal StandardWorkdays { get; set; }
+
+    [Column(TypeName = "decimal(9,2)")]
+    public decimal ActualWorkdays { get; set; }
+
+    [Column(TypeName = "decimal(9,2)")]
+    public decimal OvertimeHours { get; set; }
+
+    [Column(TypeName = "decimal(9,2)")]
+    public decimal PaidLeaveDays { get; set; }
+
+    [Column(TypeName = "decimal(9,2)")]
+    public decimal UnpaidLeaveDays { get; set; }
+
     public PayrollStatus Status { get; set; }
 
     public DateTime CalculatedAt { get; set; }
